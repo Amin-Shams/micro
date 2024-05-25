@@ -6,11 +6,14 @@
  */ 
 
 #include <avr/io.h>
+#define		KEY_DDR	DDRA
+#define		KEY_ROW	PORTA
+#define		KEY_COL	PINA
 
 
 int main(void)
 {
-    /* Replace with your application code */
+	KEY_DDR = 0x1F;
     while (1) 
     {
     }

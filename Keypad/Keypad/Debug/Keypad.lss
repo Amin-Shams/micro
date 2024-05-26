@@ -3,55 +3,55 @@ Keypad.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000000b2  00000000  00000000  00000054  2**1
+  0 .text         00000162  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  00000106  2**0
+  1 .data         0000000c  00800060  00000162  000001d6  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000106  2**0
+  2 .comment      00000030  00000000  00000000  000001e2  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000138  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000214  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000174  2**0
+  4 .debug_aranges 00000028  00000000  00000000  00000250  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000650  00000000  00000000  00000194  2**0
+  5 .debug_info   0000069e  00000000  00000000  00000278  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005a0  00000000  00000000  000007e4  2**0
+  6 .debug_abbrev 000005f1  00000000  00000000  00000916  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000023c  00000000  00000000  00000d84  2**0
+  7 .debug_line   00000274  00000000  00000000  00000f07  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00000fc0  2**2
+  8 .debug_frame  00000044  00000000  00000000  0000117c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000330  00000000  00000000  00000fe4  2**0
+  9 .debug_str    00000344  00000000  00000000  000011c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000006c  00000000  00000000  00001314  2**0
+ 10 .debug_loc    0000015d  00000000  00000000  00001504  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00001380  2**0
+ 11 .debug_ranges 00000018  00000000  00000000  00001661  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
-   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
-  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
 
 00000054 <__ctors_end>:
   54:	11 24       	eor	r1, r1
@@ -60,86 +60,215 @@ Disassembly of section .text:
   5a:	d8 e0       	ldi	r29, 0x08	; 8
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
-  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
-  64:	0c 94 57 00 	jmp	0xae	; 0xae <_exit>
 
-00000068 <__bad_interrupt>:
-  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e2 e6       	ldi	r30, 0x62	; 98
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ac 36       	cpi	r26, 0x6C	; 108
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 97 00 	call	0x12e	; 0x12e <main>
+  7a:	0c 94 af 00 	jmp	0x15e	; 0x15e <_exit>
 
-0000006c <main>:
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <letterReader>:
+#define		KEY_DDR	DDRA
+#define		KEY_ROW	PORTA
 #define		KEY_COL	PINA
 
+unsigned char letterReader( int row )
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	cd b7       	in	r28, 0x3d	; 61
+  88:	de b7       	in	r29, 0x3e	; 62
+  8a:	2c 97       	sbiw	r28, 0x0c	; 12
+  8c:	0f b6       	in	r0, 0x3f	; 63
+  8e:	f8 94       	cli
+  90:	de bf       	out	0x3e, r29	; 62
+  92:	0f be       	out	0x3f, r0	; 63
+  94:	cd bf       	out	0x3d, r28	; 61
+  96:	ac 01       	movw	r20, r24
+	unsigned char table [4][3] = {{'1','2','3'},
+  98:	8c e0       	ldi	r24, 0x0C	; 12
+  9a:	e0 e6       	ldi	r30, 0x60	; 96
+  9c:	f0 e0       	ldi	r31, 0x00	; 0
+  9e:	de 01       	movw	r26, r28
+  a0:	11 96       	adiw	r26, 0x01	; 1
+  a2:	01 90       	ld	r0, Z+
+  a4:	0d 92       	st	X+, r0
+  a6:	8a 95       	dec	r24
+  a8:	e1 f7       	brne	.-8      	; 0xa2 <letterReader+0x20>
+								  {'4','5','6'},
+								  {'7','8','9'},
+								  {'*','0','#'}};
+		
+	KEY_ROW = ~(1<<row);
+  aa:	21 e0       	ldi	r18, 0x01	; 1
+  ac:	30 e0       	ldi	r19, 0x00	; 0
+  ae:	04 2e       	mov	r0, r20
+  b0:	02 c0       	rjmp	.+4      	; 0xb6 <letterReader+0x34>
+  b2:	22 0f       	add	r18, r18
+  b4:	33 1f       	adc	r19, r19
+  b6:	0a 94       	dec	r0
+  b8:	e2 f7       	brpl	.-8      	; 0xb2 <letterReader+0x30>
+  ba:	20 95       	com	r18
+  bc:	2b bb       	out	0x1b, r18	; 27
+	unsigned int column = (KEY_COL & 0xE0)>>5;
+  be:	99 b3       	in	r25, 0x19	; 25
+	unsigned char letter;
+	switch(column)
+  c0:	92 95       	swap	r25
+  c2:	96 95       	lsr	r25
+  c4:	97 70       	andi	r25, 0x07	; 7
+  c6:	95 30       	cpi	r25, 0x05	; 5
+  c8:	99 f0       	breq	.+38     	; 0xf0 <letterReader+0x6e>
+  ca:	18 f4       	brcc	.+6      	; 0xd2 <letterReader+0x50>
+  cc:	93 30       	cpi	r25, 0x03	; 3
+  ce:	d1 f0       	breq	.+52     	; 0x104 <letterReader+0x82>
+  d0:	23 c0       	rjmp	.+70     	; 0x118 <letterReader+0x96>
+  d2:	96 30       	cpi	r25, 0x06	; 6
+  d4:	19 f0       	breq	.+6      	; 0xdc <letterReader+0x5a>
+  d6:	97 30       	cpi	r25, 0x07	; 7
+  d8:	01 f1       	breq	.+64     	; 0x11a <letterReader+0x98>
+  da:	1e c0       	rjmp	.+60     	; 0x118 <letterReader+0x96>
+			letter = 0;
+			return letter;
+		}
+		case(6):
+		{
+			letter = table[row][2];
+  dc:	fa 01       	movw	r30, r20
+  de:	ee 0f       	add	r30, r30
+  e0:	ff 1f       	adc	r31, r31
+  e2:	4e 0f       	add	r20, r30
+  e4:	5f 1f       	adc	r21, r31
+  e6:	fe 01       	movw	r30, r28
+  e8:	e4 0f       	add	r30, r20
+  ea:	f5 1f       	adc	r31, r21
+  ec:	83 81       	ldd	r24, Z+3	; 0x03
+			return letter;
+  ee:	16 c0       	rjmp	.+44     	; 0x11c <letterReader+0x9a>
+		}
+		case(5):
+		{
+			letter = table[row][1];
+  f0:	fa 01       	movw	r30, r20
+  f2:	ee 0f       	add	r30, r30
+  f4:	ff 1f       	adc	r31, r31
+  f6:	4e 0f       	add	r20, r30
+  f8:	5f 1f       	adc	r21, r31
+  fa:	fe 01       	movw	r30, r28
+  fc:	e4 0f       	add	r30, r20
+  fe:	f5 1f       	adc	r31, r21
+ 100:	82 81       	ldd	r24, Z+2	; 0x02
+			return letter;
+ 102:	0c c0       	rjmp	.+24     	; 0x11c <letterReader+0x9a>
+		}
+		case(3):
+		{
+			letter = table[row][0];
+ 104:	fa 01       	movw	r30, r20
+ 106:	ee 0f       	add	r30, r30
+ 108:	ff 1f       	adc	r31, r31
+ 10a:	4e 0f       	add	r20, r30
+ 10c:	5f 1f       	adc	r21, r31
+ 10e:	fe 01       	movw	r30, r28
+ 110:	e4 0f       	add	r30, r20
+ 112:	f5 1f       	adc	r31, r21
+ 114:	81 81       	ldd	r24, Z+1	; 0x01
+			return letter;
+ 116:	02 c0       	rjmp	.+4      	; 0x11c <letterReader+0x9a>
+		}
+	}
+}
+ 118:	01 c0       	rjmp	.+2      	; 0x11c <letterReader+0x9a>
+	switch(column)
+	{
+		case(7):
+		{
+			letter = 0;
+			return letter;
+ 11a:	80 e0       	ldi	r24, 0x00	; 0
+		{
+			letter = table[row][0];
+			return letter;
+		}
+	}
+}
+ 11c:	2c 96       	adiw	r28, 0x0c	; 12
+ 11e:	0f b6       	in	r0, 0x3f	; 63
+ 120:	f8 94       	cli
+ 122:	de bf       	out	0x3e, r29	; 62
+ 124:	0f be       	out	0x3f, r0	; 63
+ 126:	cd bf       	out	0x3d, r28	; 61
+ 128:	df 91       	pop	r29
+ 12a:	cf 91       	pop	r28
+ 12c:	08 95       	ret
+
+0000012e <main>:
 
 int main(void)
 {
 	DDRC = 0xFF;
-  6c:	8f ef       	ldi	r24, 0xFF	; 255
-  6e:	84 bb       	out	0x14, r24	; 20
+ 12e:	8f ef       	ldi	r24, 0xFF	; 255
+ 130:	84 bb       	out	0x14, r24	; 20
 	
 	unsigned int login = 0;
 	KEY_DDR = 0x1F;
-  70:	8f e1       	ldi	r24, 0x1F	; 31
-  72:	8a bb       	out	0x1a, r24	; 26
-    {
-		if ( login == 0 )
-		{
-			for ( int i = 0 ; i < 4 ; i++ )
-			{
-				KEY_ROW = ~(1<<i);
-  74:	41 e0       	ldi	r20, 0x01	; 1
-  76:	50 e0       	ldi	r21, 0x00	; 0
-								  {'*','0','#'}};
+ 132:	8f e1       	ldi	r24, 0x1F	; 31
+ 134:	8a bb       	out	0x1a, r24	; 26
+
     while (1) 
     {
 		if ( login == 0 )
 		{
 			for ( int i = 0 ; i < 4 ; i++ )
-  78:	80 e0       	ldi	r24, 0x00	; 0
-  7a:	90 e0       	ldi	r25, 0x00	; 0
-			{
-				KEY_ROW = ~(1<<i);
-  7c:	9a 01       	movw	r18, r20
-  7e:	08 2e       	mov	r0, r24
-  80:	02 c0       	rjmp	.+4      	; 0x86 <main+0x1a>
-  82:	22 0f       	add	r18, r18
-  84:	33 1f       	adc	r19, r19
-  86:	0a 94       	dec	r0
-  88:	e2 f7       	brpl	.-8      	; 0x82 <main+0x16>
-  8a:	20 95       	com	r18
-  8c:	2b bb       	out	0x1b, r18	; 27
-				column = (KEY_COL & 0xE0)>>5;
-  8e:	29 b3       	in	r18, 0x19	; 25
-  90:	22 95       	swap	r18
-  92:	26 95       	lsr	r18
-  94:	27 70       	andi	r18, 0x07	; 7
-				PORTC = column;
-  96:	25 bb       	out	0x15, r18	; 21
+ 136:	c0 e0       	ldi	r28, 0x00	; 0
+ 138:	d0 e0       	ldi	r29, 0x00	; 0
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  98:	e7 ea       	ldi	r30, 0xA7	; 167
-  9a:	f1 e6       	ldi	r31, 0x61	; 97
-  9c:	31 97       	sbiw	r30, 0x01	; 1
-  9e:	f1 f7       	brne	.-4      	; 0x9c <main+0x30>
-  a0:	00 c0       	rjmp	.+0      	; 0xa2 <main+0x36>
-  a2:	00 00       	nop
-								  {'*','0','#'}};
+ 13a:	2f ef       	ldi	r18, 0xFF	; 255
+ 13c:	80 e7       	ldi	r24, 0x70	; 112
+ 13e:	92 e0       	ldi	r25, 0x02	; 2
+ 140:	21 50       	subi	r18, 0x01	; 1
+ 142:	80 40       	sbci	r24, 0x00	; 0
+ 144:	90 40       	sbci	r25, 0x00	; 0
+ 146:	e1 f7       	brne	.-8      	; 0x140 <main+0x12>
+ 148:	00 c0       	rjmp	.+0      	; 0x14a <main+0x1c>
+ 14a:	00 00       	nop
+			{
+				_delay_ms(100);
+				PORTC = letterReader(i);
+ 14c:	ce 01       	movw	r24, r28
+ 14e:	0e 94 41 00 	call	0x82	; 0x82 <letterReader>
+ 152:	85 bb       	out	0x15, r24	; 21
+
     while (1) 
     {
 		if ( login == 0 )
 		{
 			for ( int i = 0 ; i < 4 ; i++ )
-  a4:	01 96       	adiw	r24, 0x01	; 1
-  a6:	84 30       	cpi	r24, 0x04	; 4
-  a8:	91 05       	cpc	r25, r1
-  aa:	41 f7       	brne	.-48     	; 0x7c <main+0x10>
-  ac:	e5 cf       	rjmp	.-54     	; 0x78 <main+0xc>
+ 154:	21 96       	adiw	r28, 0x01	; 1
+ 156:	c4 30       	cpi	r28, 0x04	; 4
+ 158:	d1 05       	cpc	r29, r1
+ 15a:	79 f7       	brne	.-34     	; 0x13a <main+0xc>
+ 15c:	ec cf       	rjmp	.-40     	; 0x136 <main+0x8>
 
-000000ae <_exit>:
-  ae:	f8 94       	cli
+0000015e <_exit>:
+ 15e:	f8 94       	cli
 
-000000b0 <__stop_program>:
-  b0:	ff cf       	rjmp	.-2      	; 0xb0 <__stop_program>
+00000160 <__stop_program>:
+ 160:	ff cf       	rjmp	.-2      	; 0x160 <__stop_program>

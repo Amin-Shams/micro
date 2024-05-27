@@ -16,8 +16,13 @@
 
 #define		LCD_DDR DDRB
 #define		LCD_OUT PORTB
-#define		LCD_IN	 PINB
+#define		LCD_IN	PINB
 
+#define		ETC_DDR DDRD
+#define		ETC_OUT PORTD
+#define		ETC_IN	PIND
+
+unsigned int login = 0;
 unsigned char password[8] = "0000";
 unsigned char inPass[8] = "";
 unsigned char empty[8] = "\0";
@@ -29,6 +34,14 @@ unsigned char passwordCheck()
 		if ( inPass [j] != password [j] )
 			return '0';
 	}
+	
+	unsigned char y,e,s;
+	y = 'Y'; e = 'E' ; s = 'S';
+	lcdType(y);
+	lcdType(e);
+	lcdType(s);
+	ETC_OUT = 0x0C;
+	login = 1;
 	return '1';
 }
 
@@ -71,17 +84,16 @@ unsigned char letterReader( int row )
 void lcdCommand( unsigned char cmd )
 {
 	LCD_OUT = cmd;
-	PORTD = 1;
+	ETC_OUT = 0x01;
 	_delay_us(1);
-	PORTD = 0;
+	ETC_OUT = 0x00;
 	_delay_us(100);
 }
 
 void lcdInit()
 {
-	DDRD = 0x07;
 	LCD_DDR = 0xFF;
-	PORTD = 0;
+	ETC_OUT = 0x00;
 	_delay_ms(1);
 	
 	lcdCommand(0x34);
@@ -104,9 +116,9 @@ void lcdType( unsigned char letter )
 		inPass[strlen(inPass)-1] = '\0';
 		lcdCommand(0x10);
 		LCD_OUT = 0x20;
-		PORTD = 0b101;
+		ETC_OUT = 0x05;
 		_delay_us(1);
-		PORTD = 0b100;
+		ETC_OUT = 0x04;
 		_delay_us(100);
 		lcdCommand(0x10);
 		return;
@@ -115,15 +127,7 @@ void lcdType( unsigned char letter )
 	{
 		lcdCommand(1);
 		lcdCommand(2);
-		if ( passwordCheck() == '1' )
-		{
-			unsigned char y,e,s;
-			y = 'Y'; e = 'E' ; s = 'S';
-			lcdType(y);
-			lcdType(e);
-			lcdType(s);
-		}
-		PORTC = passwordCheck(inPass);
+		passwordCheck();
 		memset(inPass,'\0',sizeof(inPass));
 		return;
 	}
@@ -131,9 +135,9 @@ void lcdType( unsigned char letter )
 	{
 		strncat(inPass,&letter,1);
 		LCD_OUT = letter;
-		PORTD = 0b101;
+		ETC_OUT = 0x05;
 		_delay_us(1);
-		PORTD = 0b100;
+		ETC_OUT = 0x04;
 		_delay_us(100);
 	}
 }
@@ -141,14 +145,16 @@ void lcdType( unsigned char letter )
 int main(void)
 {
 	DDRC = 0xFF;
+	ETC_DDR = 0x0F;
+	ETC_OUT =0x0F;
 	
-	unsigned int login = 0;
 	KEY_DDR = 0x1F;
 	lcdInit();
 	unsigned char letter;
 
     while (1) 
     {
+		PORTC = login;
 		if ( login == 0 )
 		{
 			

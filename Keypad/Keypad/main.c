@@ -8,14 +8,29 @@
 #include <avr/io.h>
 #define F_CPU 8000000UL									//Maybe will change
 #include <util/delay.h>									//Maybe I'll change it in the future
+#include <string.h>
 
 #define		KEY_DDR	DDRA
 #define		KEY_ROW	PORTA
 #define		KEY_COL	PINA
 
-#define		LCD1_DDR DDRB
-#define		LCD1_OUT PORTB
-#define		LCD1_IN	 PINB
+#define		LCD_DDR DDRB
+#define		LCD_OUT PORTB
+#define		LCD_IN	 PINB
+
+unsigned char password[8] = "0000";
+unsigned char inPass[8] = "";
+unsigned char empty[8] = "\0";
+
+unsigned char passwordCheck()
+{
+	for ( int j = 0 ; j<8 ; j++ )
+	{
+		if ( inPass [j] != password [j] )
+			return '0';
+	}
+	return '1';
+}
 
 unsigned char letterReader( int row )
 {
@@ -53,36 +68,74 @@ unsigned char letterReader( int row )
 	return 0;
 }
 
-void lcdLoginCommand( unsigned char cmd )
+void lcdCommand( unsigned char cmd )
 {
-	LCD1_OUT = cmd;
+	LCD_OUT = cmd;
 	PORTD = 1;
 	_delay_us(1);
 	PORTD = 0;
 	_delay_us(100);
 }
 
-void lcdLoginInit()
+void lcdInit()
 {
 	DDRD = 0x07;
-	LCD1_DDR = 0xFF;
+	LCD_DDR = 0xFF;
 	PORTD = 0;
 	_delay_ms(1);
 	
-	lcdLoginCommand(0x34);
-	lcdLoginCommand(0x0F);
-	lcdLoginCommand(0x01);
+	lcdCommand(0x34);
+	lcdCommand(0x0F);
+	lcdCommand(0x01);
 	_delay_ms(1);
-	lcdLoginCommand(0x06);
+	lcdCommand(0x06);
 }
 
-void lcdLoginType( unsigned char letter )
+void lcdType( unsigned char letter )
 {
-	LCD1_OUT = letter;
-	PORTD = 0b101;
-	_delay_us(1);
-	PORTD = 0b100;
-	_delay_us(100);
+	if ( letter == '*' )
+	{
+		if (strlen(inPass) == 0)
+		{
+			lcdCommand(2);
+			return;
+		}
+			
+		inPass[strlen(inPass)-1] = '\0';
+		lcdCommand(0x10);
+		LCD_OUT = 0x20;
+		PORTD = 0b101;
+		_delay_us(1);
+		PORTD = 0b100;
+		_delay_us(100);
+		lcdCommand(0x10);
+		return;
+	}
+	else if ( letter == '#' )
+	{
+		lcdCommand(1);
+		lcdCommand(2);
+		if ( passwordCheck() == '1' )
+		{
+			unsigned char y,e,s;
+			y = 'Y'; e = 'E' ; s = 'S';
+			lcdType(y);
+			lcdType(e);
+			lcdType(s);
+		}
+		PORTC = passwordCheck(inPass);
+		memset(inPass,'\0',sizeof(inPass));
+		return;
+	}
+	else
+	{
+		strncat(inPass,&letter,1);
+		LCD_OUT = letter;
+		PORTD = 0b101;
+		_delay_us(1);
+		PORTD = 0b100;
+		_delay_us(100);
+	}
 }
 
 int main(void)
@@ -91,7 +144,7 @@ int main(void)
 	
 	unsigned int login = 0;
 	KEY_DDR = 0x1F;
-	lcdLoginInit();
+	lcdInit();
 	unsigned char letter;
 
     while (1) 
@@ -103,9 +156,8 @@ int main(void)
 			{
 				_delay_ms(6);
 				letter = letterReader(i);
-				PORTC = letter;
 				if(letter != 0)
-					lcdLoginType(letter);
+					lcdType(letter);
 			}
 		}
     }

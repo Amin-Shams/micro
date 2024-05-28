@@ -34,14 +34,6 @@ unsigned char passwordCheck()
 		if ( inPass [j] != password [j] )
 			return '0';
 	}
-	
-	unsigned char y,e,s;
-	y = 'Y'; e = 'E' ; s = 'S';
-	lcdType(y);
-	lcdType(e);
-	lcdType(s);
-	ETC_OUT = 0x0C;
-	login = 1;
 	return '1';
 }
 
@@ -84,14 +76,15 @@ unsigned char letterReader( int row )
 void lcdCommand( unsigned char cmd )
 {
 	LCD_OUT = cmd;
-	ETC_OUT = 0x01;
+	ETC_OUT = 1;
 	_delay_us(1);
-	ETC_OUT = 0x00;
+	ETC_OUT = 0;
 	_delay_us(100);
 }
 
 void lcdInit()
 {
+	ETC_DDR = 0x0F;
 	LCD_DDR = 0xFF;
 	ETC_OUT = 0x00;
 	_delay_ms(1);
@@ -127,7 +120,16 @@ void lcdType( unsigned char letter )
 	{
 		lcdCommand(1);
 		lcdCommand(2);
-		passwordCheck();
+		if ( passwordCheck() == '1')
+		{
+			unsigned char y,e,s;
+			y = 'Y'; e = 'E' ; s = 'S';
+			lcdType(y);
+			lcdType(e);
+			lcdType(s);
+			ETC_OUT = 0x0C;
+			login = 1;
+		}
 		memset(inPass,'\0',sizeof(inPass));
 		return;
 	}
@@ -145,7 +147,6 @@ void lcdType( unsigned char letter )
 int main(void)
 {
 	DDRC = 0xFF;
-	ETC_DDR = 0x0F;
 	ETC_OUT =0x0F;
 	
 	KEY_DDR = 0x1F;

@@ -3,31 +3,31 @@ Keypad.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000002f4  00000000  00000000  00000094  2**1
+  0 .text         00000314  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000014  00800060  000002f4  00000388  2**0
+  1 .data         00000014  00800060  00000314  000003a8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000008  00800074  00800074  0000039c  2**0
+  2 .bss          0000000a  00800074  00800074  000003bc  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000039c  2**0
+  3 .comment      00000030  00000000  00000000  000003bc  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003cc  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003ec  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000048  00000000  00000000  00000408  2**0
+  5 .debug_aranges 00000048  00000000  00000000  00000428  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000b25  00000000  00000000  00000450  2**0
+  6 .debug_info   00000b12  00000000  00000000  00000470  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006e2  00000000  00000000  00000f75  2**0
+  7 .debug_abbrev 000006e2  00000000  00000000  00000f82  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000429  00000000  00000000  00001657  2**0
+  8 .debug_line   0000043b  00000000  00000000  00001664  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000009c  00000000  00000000  00001a80  2**2
+  9 .debug_frame  0000009c  00000000  00000000  00001aa0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000039a  00000000  00000000  00001b1c  2**0
+ 10 .debug_str    0000039a  00000000  00000000  00001b3c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000050b  00000000  00000000  00001eb6  2**0
+ 11 .debug_loc    000004e7  00000000  00000000  00001ed6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  000023c1  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  000023bd  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -67,8 +67,8 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e4 ef       	ldi	r30, 0xF4	; 244
-  68:	f2 e0       	ldi	r31, 0x02	; 2
+  66:	e4 e1       	ldi	r30, 0x14	; 20
+  68:	f3 e0       	ldi	r31, 0x03	; 3
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	ac 37       	cpi	r26, 0x7C	; 124
+  80:	ae 37       	cpi	r26, 0x7E	; 126
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 4f 01 	call	0x29e	; 0x29e <main>
-  8a:	0c 94 78 01 	jmp	0x2f0	; 0x2f0 <_exit>
+  86:	0e 94 52 01 	call	0x2a4	; 0x2a4 <main>
+  8a:	0c 94 88 01 	jmp	0x310	; 0x310 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -276,7 +276,7 @@ void lcdCommand( unsigned char cmd )
 {
 	LCD_OUT = cmd;
  166:	88 bb       	out	0x18, r24	; 24
-	PORTD = 1;
+	ETC_OUT = 1;
  168:	81 e0       	ldi	r24, 0x01	; 1
  16a:	82 bb       	out	0x12, r24	; 18
 	#else
@@ -290,7 +290,7 @@ void lcdCommand( unsigned char cmd )
  170:	f1 f7       	brne	.-4      	; 0x16e <lcdCommand+0x8>
  172:	00 c0       	rjmp	.+0      	; 0x174 <lcdCommand+0xe>
 	_delay_us(1);
-	PORTD = 0;
+	ETC_OUT = 0;
  174:	12 ba       	out	0x12, r1	; 18
  176:	87 ec       	ldi	r24, 0xC7	; 199
  178:	90 e0       	ldi	r25, 0x00	; 0
@@ -306,13 +306,13 @@ void lcdCommand( unsigned char cmd )
 
 void lcdInit()
 {
-	DDRD = 0x07;
- 184:	87 e0       	ldi	r24, 0x07	; 7
+	ETC_DDR = 0x0F;
+ 184:	8f e0       	ldi	r24, 0x0F	; 15
  186:	81 bb       	out	0x11, r24	; 17
 	LCD_DDR = 0xFF;
  188:	8f ef       	ldi	r24, 0xFF	; 255
  18a:	87 bb       	out	0x17, r24	; 23
-	PORTD = 0;
+	ETC_OUT = 0x00;
  18c:	12 ba       	out	0x12, r1	; 18
 	#else
 		//round up by default
@@ -375,7 +375,7 @@ void lcdType( unsigned char letter )
  1dc:	82 e0       	ldi	r24, 0x02	; 2
  1de:	0e 94 b3 00 	call	0x166	; 0x166 <lcdCommand>
 			return;
- 1e2:	58 c0       	rjmp	.+176    	; 0x294 <lcdType+0xd4>
+ 1e2:	5b c0       	rjmp	.+182    	; 0x29a <lcdType+0xda>
 		}
 			
 		inPass[strlen(inPass)-1] = '\0';
@@ -392,7 +392,7 @@ void lcdType( unsigned char letter )
 		LCD_OUT = 0x20;
  1f8:	80 e2       	ldi	r24, 0x20	; 32
  1fa:	88 bb       	out	0x18, r24	; 24
-		PORTD = 0b101;
+		ETC_OUT = 0x05;
  1fc:	85 e0       	ldi	r24, 0x05	; 5
  1fe:	82 bb       	out	0x12, r24	; 18
 	#else
@@ -406,7 +406,7 @@ void lcdType( unsigned char letter )
  204:	f1 f7       	brne	.-4      	; 0x202 <lcdType+0x42>
  206:	00 c0       	rjmp	.+0      	; 0x208 <lcdType+0x48>
 		_delay_us(1);
-		PORTD = 0b100;
+		ETC_OUT = 0x04;
  208:	84 e0       	ldi	r24, 0x04	; 4
  20a:	82 bb       	out	0x12, r24	; 18
  20c:	a7 ec       	ldi	r26, 0xC7	; 199
@@ -420,11 +420,11 @@ void lcdType( unsigned char letter )
  218:	80 e1       	ldi	r24, 0x10	; 16
  21a:	0e 94 b3 00 	call	0x166	; 0x166 <lcdCommand>
 		return;
- 21e:	3a c0       	rjmp	.+116    	; 0x294 <lcdType+0xd4>
+ 21e:	3d c0       	rjmp	.+122    	; 0x29a <lcdType+0xda>
 	}
 	else if ( letter == '#' )
  220:	83 32       	cpi	r24, 0x23	; 35
- 222:	01 f5       	brne	.+64     	; 0x264 <lcdType+0xa4>
+ 222:	19 f5       	brne	.+70     	; 0x26a <lcdType+0xaa>
 	{
 		lcdCommand(1);
  224:	81 e0       	ldi	r24, 0x01	; 1
@@ -432,10 +432,10 @@ void lcdType( unsigned char letter )
 		lcdCommand(2);
  22a:	82 e0       	ldi	r24, 0x02	; 2
  22c:	0e 94 b3 00 	call	0x166	; 0x166 <lcdCommand>
-		if ( passwordCheck() == '1' )
+		if ( passwordCheck() == '1')
  230:	0e 94 49 00 	call	0x92	; 0x92 <passwordCheck>
  234:	81 33       	cpi	r24, 0x31	; 49
- 236:	49 f4       	brne	.+18     	; 0x24a <lcdType+0x8a>
+ 236:	89 f4       	brne	.+34     	; 0x25a <lcdType+0x9a>
 		{
 			unsigned char y,e,s;
 			y = 'Y'; e = 'E' ; s = 'S';
@@ -448,137 +448,154 @@ void lcdType( unsigned char letter )
 			lcdType(s);
  244:	83 e5       	ldi	r24, 0x53	; 83
  246:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <lcdType>
+			ETC_OUT = 0x0C;
+ 24a:	8c e0       	ldi	r24, 0x0C	; 12
+ 24c:	82 bb       	out	0x12, r24	; 18
+			login = 1;
+ 24e:	81 e0       	ldi	r24, 0x01	; 1
+ 250:	90 e0       	ldi	r25, 0x00	; 0
+ 252:	90 93 7d 00 	sts	0x007D, r25	; 0x80007d <login+0x1>
+ 256:	80 93 7c 00 	sts	0x007C, r24	; 0x80007c <login>
 		}
-		PORTC = passwordCheck(inPass);
- 24a:	84 e7       	ldi	r24, 0x74	; 116
- 24c:	90 e0       	ldi	r25, 0x00	; 0
- 24e:	0e 94 49 00 	call	0x92	; 0x92 <passwordCheck>
- 252:	85 bb       	out	0x15, r24	; 21
 		memset(inPass,'\0',sizeof(inPass));
- 254:	88 e0       	ldi	r24, 0x08	; 8
- 256:	e4 e7       	ldi	r30, 0x74	; 116
- 258:	f0 e0       	ldi	r31, 0x00	; 0
- 25a:	df 01       	movw	r26, r30
- 25c:	1d 92       	st	X+, r1
- 25e:	8a 95       	dec	r24
- 260:	e9 f7       	brne	.-6      	; 0x25c <lcdType+0x9c>
+ 25a:	88 e0       	ldi	r24, 0x08	; 8
+ 25c:	e4 e7       	ldi	r30, 0x74	; 116
+ 25e:	f0 e0       	ldi	r31, 0x00	; 0
+ 260:	df 01       	movw	r26, r30
+ 262:	1d 92       	st	X+, r1
+ 264:	8a 95       	dec	r24
+ 266:	e9 f7       	brne	.-6      	; 0x262 <lcdType+0xa2>
 		return;
- 262:	18 c0       	rjmp	.+48     	; 0x294 <lcdType+0xd4>
+ 268:	18 c0       	rjmp	.+48     	; 0x29a <lcdType+0xda>
 	}
 	else
 	{
 		strncat(inPass,&letter,1);
- 264:	41 e0       	ldi	r20, 0x01	; 1
- 266:	50 e0       	ldi	r21, 0x00	; 0
- 268:	be 01       	movw	r22, r28
- 26a:	6f 5f       	subi	r22, 0xFF	; 255
- 26c:	7f 4f       	sbci	r23, 0xFF	; 255
- 26e:	84 e7       	ldi	r24, 0x74	; 116
- 270:	90 e0       	ldi	r25, 0x00	; 0
- 272:	0e 94 68 01 	call	0x2d0	; 0x2d0 <strncat>
+ 26a:	41 e0       	ldi	r20, 0x01	; 1
+ 26c:	50 e0       	ldi	r21, 0x00	; 0
+ 26e:	be 01       	movw	r22, r28
+ 270:	6f 5f       	subi	r22, 0xFF	; 255
+ 272:	7f 4f       	sbci	r23, 0xFF	; 255
+ 274:	84 e7       	ldi	r24, 0x74	; 116
+ 276:	90 e0       	ldi	r25, 0x00	; 0
+ 278:	0e 94 78 01 	call	0x2f0	; 0x2f0 <strncat>
 		LCD_OUT = letter;
- 276:	18 bb       	out	0x18, r17	; 24
-		PORTD = 0b101;
- 278:	85 e0       	ldi	r24, 0x05	; 5
- 27a:	82 bb       	out	0x12, r24	; 18
- 27c:	b2 e0       	ldi	r27, 0x02	; 2
- 27e:	ba 95       	dec	r27
- 280:	f1 f7       	brne	.-4      	; 0x27e <lcdType+0xbe>
- 282:	00 c0       	rjmp	.+0      	; 0x284 <lcdType+0xc4>
+ 27c:	18 bb       	out	0x18, r17	; 24
+		ETC_OUT = 0x05;
+ 27e:	85 e0       	ldi	r24, 0x05	; 5
+ 280:	82 bb       	out	0x12, r24	; 18
+ 282:	b2 e0       	ldi	r27, 0x02	; 2
+ 284:	ba 95       	dec	r27
+ 286:	f1 f7       	brne	.-4      	; 0x284 <lcdType+0xc4>
+ 288:	00 c0       	rjmp	.+0      	; 0x28a <lcdType+0xca>
 		_delay_us(1);
-		PORTD = 0b100;
- 284:	84 e0       	ldi	r24, 0x04	; 4
- 286:	82 bb       	out	0x12, r24	; 18
- 288:	87 ec       	ldi	r24, 0xC7	; 199
- 28a:	90 e0       	ldi	r25, 0x00	; 0
- 28c:	01 97       	sbiw	r24, 0x01	; 1
- 28e:	f1 f7       	brne	.-4      	; 0x28c <lcdType+0xcc>
- 290:	00 c0       	rjmp	.+0      	; 0x292 <lcdType+0xd2>
- 292:	00 00       	nop
+		ETC_OUT = 0x04;
+ 28a:	84 e0       	ldi	r24, 0x04	; 4
+ 28c:	82 bb       	out	0x12, r24	; 18
+ 28e:	87 ec       	ldi	r24, 0xC7	; 199
+ 290:	90 e0       	ldi	r25, 0x00	; 0
+ 292:	01 97       	sbiw	r24, 0x01	; 1
+ 294:	f1 f7       	brne	.-4      	; 0x292 <lcdType+0xd2>
+ 296:	00 c0       	rjmp	.+0      	; 0x298 <lcdType+0xd8>
+ 298:	00 00       	nop
 		_delay_us(100);
 	}
 }
- 294:	0f 90       	pop	r0
- 296:	df 91       	pop	r29
- 298:	cf 91       	pop	r28
- 29a:	1f 91       	pop	r17
- 29c:	08 95       	ret
+ 29a:	0f 90       	pop	r0
+ 29c:	df 91       	pop	r29
+ 29e:	cf 91       	pop	r28
+ 2a0:	1f 91       	pop	r17
+ 2a2:	08 95       	ret
 
-0000029e <main>:
+000002a4 <main>:
 
 int main(void)
 {
 	DDRC = 0xFF;
- 29e:	8f ef       	ldi	r24, 0xFF	; 255
- 2a0:	84 bb       	out	0x14, r24	; 20
+ 2a4:	8f ef       	ldi	r24, 0xFF	; 255
+ 2a6:	84 bb       	out	0x14, r24	; 20
+	ETC_OUT =0x0F;
+ 2a8:	8f e0       	ldi	r24, 0x0F	; 15
+ 2aa:	82 bb       	out	0x12, r24	; 18
 	
-	unsigned int login = 0;
 	KEY_DDR = 0x1F;
- 2a2:	8f e1       	ldi	r24, 0x1F	; 31
- 2a4:	8a bb       	out	0x1a, r24	; 26
+ 2ac:	8f e1       	ldi	r24, 0x1F	; 31
+ 2ae:	8a bb       	out	0x1a, r24	; 26
 	lcdInit();
- 2a6:	0e 94 c2 00 	call	0x184	; 0x184 <lcdInit>
+ 2b0:	0e 94 c2 00 	call	0x184	; 0x184 <lcdInit>
+	unsigned char letter;
+
     while (1) 
     {
+		PORTC = login;
+ 2b4:	0c e7       	ldi	r16, 0x7C	; 124
+ 2b6:	10 e0       	ldi	r17, 0x00	; 0
+ 2b8:	f8 01       	movw	r30, r16
+ 2ba:	80 81       	ld	r24, Z
+ 2bc:	85 bb       	out	0x15, r24	; 21
 		if ( login == 0 )
-		{
-			
-			for ( int i = 0 ; i < 4 ; i++ )
- 2aa:	c0 e0       	ldi	r28, 0x00	; 0
- 2ac:	d0 e0       	ldi	r29, 0x00	; 0
+ 2be:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <login>
+ 2c2:	90 91 7d 00 	lds	r25, 0x007D	; 0x80007d <login+0x1>
+ 2c6:	89 2b       	or	r24, r25
+ 2c8:	b9 f7       	brne	.-18     	; 0x2b8 <main+0x14>
+ 2ca:	c0 e0       	ldi	r28, 0x00	; 0
+ 2cc:	d0 e0       	ldi	r29, 0x00	; 0
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 2ae:	8f ed       	ldi	r24, 0xDF	; 223
- 2b0:	9e e2       	ldi	r25, 0x2E	; 46
- 2b2:	01 97       	sbiw	r24, 0x01	; 1
- 2b4:	f1 f7       	brne	.-4      	; 0x2b2 <main+0x14>
- 2b6:	00 c0       	rjmp	.+0      	; 0x2b8 <main+0x1a>
- 2b8:	00 00       	nop
+ 2ce:	8f ed       	ldi	r24, 0xDF	; 223
+ 2d0:	9e e2       	ldi	r25, 0x2E	; 46
+ 2d2:	01 97       	sbiw	r24, 0x01	; 1
+ 2d4:	f1 f7       	brne	.-4      	; 0x2d2 <main+0x2e>
+ 2d6:	00 c0       	rjmp	.+0      	; 0x2d8 <main+0x34>
+ 2d8:	00 00       	nop
+		{
+			
+			for ( int i = 0 ; i < 4 ; i++ )
 			{
 				_delay_ms(6);
 				letter = letterReader(i);
- 2ba:	ce 01       	movw	r24, r28
- 2bc:	0e 94 62 00 	call	0xc4	; 0xc4 <letterReader>
+ 2da:	ce 01       	movw	r24, r28
+ 2dc:	0e 94 62 00 	call	0xc4	; 0xc4 <letterReader>
 				if(letter != 0)
- 2c0:	81 11       	cpse	r24, r1
+ 2e0:	81 11       	cpse	r24, r1
 					lcdType(letter);
- 2c2:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <lcdType>
-    while (1) 
+ 2e2:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <lcdType>
     {
+		PORTC = login;
 		if ( login == 0 )
 		{
 			
 			for ( int i = 0 ; i < 4 ; i++ )
- 2c6:	21 96       	adiw	r28, 0x01	; 1
- 2c8:	c4 30       	cpi	r28, 0x04	; 4
- 2ca:	d1 05       	cpc	r29, r1
- 2cc:	81 f7       	brne	.-32     	; 0x2ae <main+0x10>
- 2ce:	ed cf       	rjmp	.-38     	; 0x2aa <main+0xc>
+ 2e6:	21 96       	adiw	r28, 0x01	; 1
+ 2e8:	c4 30       	cpi	r28, 0x04	; 4
+ 2ea:	d1 05       	cpc	r29, r1
+ 2ec:	81 f7       	brne	.-32     	; 0x2ce <main+0x2a>
+ 2ee:	e4 cf       	rjmp	.-56     	; 0x2b8 <main+0x14>
 
-000002d0 <strncat>:
- 2d0:	fb 01       	movw	r30, r22
- 2d2:	dc 01       	movw	r26, r24
- 2d4:	0d 90       	ld	r0, X+
- 2d6:	00 20       	and	r0, r0
- 2d8:	e9 f7       	brne	.-6      	; 0x2d4 <strncat+0x4>
- 2da:	11 97       	sbiw	r26, 0x01	; 1
- 2dc:	41 50       	subi	r20, 0x01	; 1
- 2de:	50 40       	sbci	r21, 0x00	; 0
- 2e0:	28 f0       	brcs	.+10     	; 0x2ec <strncat+0x1c>
- 2e2:	01 90       	ld	r0, Z+
- 2e4:	00 20       	and	r0, r0
- 2e6:	0d 92       	st	X+, r0
- 2e8:	c9 f7       	brne	.-14     	; 0x2dc <strncat+0xc>
- 2ea:	08 95       	ret
- 2ec:	1c 92       	st	X, r1
- 2ee:	08 95       	ret
+000002f0 <strncat>:
+ 2f0:	fb 01       	movw	r30, r22
+ 2f2:	dc 01       	movw	r26, r24
+ 2f4:	0d 90       	ld	r0, X+
+ 2f6:	00 20       	and	r0, r0
+ 2f8:	e9 f7       	brne	.-6      	; 0x2f4 <strncat+0x4>
+ 2fa:	11 97       	sbiw	r26, 0x01	; 1
+ 2fc:	41 50       	subi	r20, 0x01	; 1
+ 2fe:	50 40       	sbci	r21, 0x00	; 0
+ 300:	28 f0       	brcs	.+10     	; 0x30c <strncat+0x1c>
+ 302:	01 90       	ld	r0, Z+
+ 304:	00 20       	and	r0, r0
+ 306:	0d 92       	st	X+, r0
+ 308:	c9 f7       	brne	.-14     	; 0x2fc <strncat+0xc>
+ 30a:	08 95       	ret
+ 30c:	1c 92       	st	X, r1
+ 30e:	08 95       	ret
 
-000002f0 <_exit>:
- 2f0:	f8 94       	cli
+00000310 <_exit>:
+ 310:	f8 94       	cli
 
-000002f2 <__stop_program>:
- 2f2:	ff cf       	rjmp	.-2      	; 0x2f2 <__stop_program>
+00000312 <__stop_program>:
+ 312:	ff cf       	rjmp	.-2      	; 0x312 <__stop_program>

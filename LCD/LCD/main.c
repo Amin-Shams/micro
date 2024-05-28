@@ -58,33 +58,42 @@ void lcdInit()
 	lcdCommand(0x01);
 	_delay_ms(1);
 	lcdCommand(0x06);
-	for ( int i = 0 ; i < 80 ; i ++ )
-	{
-		if( i<16 || i>=40 )
-			lcdType(0xFF);
-		else
-			lcdType(' ');
-	}
 }
 
 void lcdLogin()
 {
-	lcdCommand(18);
+	PORTB = PINB;
+	PORTB = PINB << 1;
+	
+	unsigned char name1[] = "Mohammad Javad Rahimi		40009153";
+	lcdPrint(name1);
+	
+	lcdCommand(0xC0);
+	unsigned char name2[] = "Mohammad Amin Shams	   40011223";
+	lcdPrint(name2);
+	
+	_delay_ms(100);
+	
+	for ( int i = 0 ; i < 39 ; i++ )
+	{
+		_delay_ms(10);
+		lcdCommand(0x18);
+	}
 }
 
 int main(void)
 {
 	lcdInit();
+	Micro_DDR = 0xFF;
 	
-	DDRB = 0;
-	unsigned int login = 0;
-	_delay_ms(1000);
-	login = PINB;
+	DDRB = 2;
 	
     while (1) 
     {
-		if ( login == 1 )
+		if ( PINB == 1 )
+		{
 			lcdLogin();
+		}
     }
 }
 

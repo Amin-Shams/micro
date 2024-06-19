@@ -6,6 +6,7 @@
  */ 
 
 #include <avr/io.h>
+#include <avr/eeprom.h>
 #define F_CPU 8000000UL									//Maybe will change
 #include <util/delay.h>									//Maybe I'll change it in the future
 #include <string.h>
@@ -23,7 +24,8 @@
 #define		ETC_IN	PIND
 
 unsigned int login = 0;
-unsigned char password[8] = "0000";
+
+unsigned char EEMEM password[8];
 unsigned char inPass[8] = "";
 unsigned char empty[8] = "\0";
 
@@ -31,9 +33,10 @@ unsigned char passwordCheck()
 {
 	for ( int j = 0 ; j<8 ; j++ )
 	{
-		if ( inPass [j] != password [j] )
+		if ( inPass [j] != eeprom_read_byte(&password[j]) )
 			return '0';
 	}
+	
 	return '1';
 }
 
@@ -122,11 +125,10 @@ void lcdType( unsigned char letter )
 		lcdCommand(2);
 		if ( passwordCheck() == '1')
 		{
-			unsigned char y,e,s;
-			y = 'Y'; e = 'E' ; s = 'S';
-			lcdType(y);
-			lcdType(e);
-			lcdType(s);
+			for ( int j = 0 ; j<8 ; j++)
+			{
+				lcdType( eeprom_read_byte(&password[j]) );
+			}
 			ETC_OUT = 0x0C;
 			login = 1;
 		}
@@ -142,6 +144,11 @@ void lcdType( unsigned char letter )
 		ETC_OUT = 0x04;
 		_delay_us(100);
 	}
+}
+
+void changePassword()
+{
+	
 }
 
 int main(void)
@@ -165,6 +172,23 @@ int main(void)
 				letter = letterReader(i);
 				if(letter != 0)
 					lcdType(letter);
+			}
+		}
+		else if ( login == 1 )
+		{
+			for ( int i = 0 ; i < 4 ; i++ )
+			{
+				_delay_ms(6);
+				letter = letterReader(i);
+				if(letter == 0);
+				if(letter == '1')
+				{
+					changePassword();
+				}
+				else if ( letter == '2')
+				{
+					login = 0;
+				}
 			}
 		}
     }

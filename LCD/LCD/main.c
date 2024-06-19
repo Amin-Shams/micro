@@ -65,18 +65,54 @@ void lcdLogin()
 	PORTB = PINB;
 	PORTB = PINB << 1;
 	
-	unsigned char name1[] = "Mohammad Javad Rahimi		40009153";
+	unsigned char name1[] = "Mohammad Javad Rahimi   40009153";
 	lcdPrint(name1);
 	
-	lcdCommand(0xC0);
-	unsigned char name2[] = "Mohammad Amin Shams	   40011223";
-	lcdPrint(name2);
-	
-	_delay_ms(100);
+	_delay_ms(50);
 	
 	for ( int i = 0 ; i < 39 ; i++ )
 	{
-		_delay_ms(10);
+		_delay_ms(15);
+		lcdCommand(0x18);
+	}
+
+	lcdCommand(1);
+	_delay_ms(50);
+	lcdCommand(2);
+	
+	
+	lcdCommand(0x00);
+	unsigned char name2[] = "Mohammad Amin Shams     40011223";
+	lcdPrint(name2);
+	
+	_delay_ms(50);
+	
+	for ( int i = 0 ; i < 39 ; i++ )
+	{
+		_delay_ms(15);
+		lcdCommand(0x18);
+	}
+		
+	lcdCommand(1);
+	_delay_ms(50);
+	lcdCommand(2);
+	
+	unsigned char line1[] = "                1) Change Password                 ";
+	lcdPrint(line1);
+	
+	lcdCommand(0xC0);
+	unsigned char line2[] = "                2) Log out                    ";
+	lcdPrint(line2);
+}
+
+void options()
+{
+	
+	_delay_ms(50);
+	
+	for ( int i = 0 ; i < 39 ; i++ )
+	{
+		_delay_ms(20);
 		lcdCommand(0x18);
 	}
 }
@@ -93,6 +129,10 @@ int main(void)
 		if ( PINB == 1 )
 		{
 			lcdLogin();
+			while (1)
+			{
+				options();
+			}
 		}
     }
 }

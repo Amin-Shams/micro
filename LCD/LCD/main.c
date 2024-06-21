@@ -65,6 +65,9 @@ void lcdLogin()
 	PORTB = PINB;
 	PORTB = PINB << 1;
 	
+	lcdCommand(1);
+	lcdCommand(2);
+	
 	unsigned char name1[] = "Mohammad Javad Rahimi   40009153";
 	lcdPrint(name1);
 	
@@ -126,14 +129,32 @@ int main(void)
 	
     while (1) 
     {
-		if ( PINB == 1 )
-		{
-			lcdLogin();
-			while (1)
+			if ((PINB&(1)) == 1)
+			{
+				lcdLogin();
+				options();
+				if ( (PINB&(1)) == 0 )
+				{
+					lcdCommand(1);
+					_delay_ms(50);
+					lcdCommand(2);
+					PORTB = 0x00;
+					break;
+				}
+			}
+				
+			while ((PINB&(1)) == 1)
 			{
 				options();
+				if ( (PINB&(1)) == 0 )
+					{
+						lcdCommand(1);
+						_delay_ms(50);
+						lcdCommand(2);
+						PORTB = 0x00;
+						break;
+					}
 			}
-		}
     }
 }
 

@@ -202,7 +202,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x5ca
+.text           0x00000000      0x5ce
  *(.vectors)
  .vectors       0x00000000       0x54 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -291,35 +291,35 @@ END GROUP
                 0x000000e0       0xa2 main.o
                 0x000000e0                letterReader
  .text.lcdCommand
-                0x00000182       0x1e main.o
+                0x00000182       0x22 main.o
                 0x00000182                lcdCommand
- .text.lcdInit  0x000001a0       0x3c main.o
-                0x000001a0                lcdInit
- .text.lcdType  0x000001dc      0x15a main.o
-                0x000001dc                lcdType
+ .text.lcdInit  0x000001a4       0x3c main.o
+                0x000001a4                lcdInit
+ .text.lcdType  0x000001e0      0x15a main.o
+                0x000001e0                lcdType
  .text.lcdPassType
-                0x00000336      0x106 main.o
-                0x00000336                lcdPassType
+                0x0000033a      0x106 main.o
+                0x0000033a                lcdPassType
  .text.changePassword
-                0x0000043c       0x40 main.o
-                0x0000043c                changePassword
- .text.main     0x0000047c      0x100 main.o
-                0x0000047c                main
+                0x00000440       0x40 main.o
+                0x00000440                changePassword
+ .text.main     0x00000480      0x100 main.o
+                0x00000480                main
  .text.avr-libc
-                0x0000057c       0x20 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncat.o)
-                0x0000057c                strncat
+                0x00000580       0x20 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncat.o)
+                0x00000580                strncat
  .text.avr-libc
-                0x0000059c       0x10 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
-                0x0000059c                eeprom_read_byte
+                0x000005a0       0x10 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+                0x000005a0                eeprom_read_byte
  .text.avr-libc
-                0x000005ac       0x1a G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
-                0x000005ac                eeprom_write_byte
-                0x000005ae                eeprom_write_r18
-                0x000005c6                . = ALIGN (0x2)
+                0x000005b0       0x1a G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+                0x000005b0                eeprom_write_byte
+                0x000005b2                eeprom_write_r18
+                0x000005ca                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000005c6        0x0 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000005c6                _exit
-                0x000005c6                exit
+ .fini9         0x000005ca        0x0 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000005ca                _exit
+                0x000005ca                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -338,11 +338,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000005c6        0x4 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000005ca        0x4 g:/atmelstudio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000005ca                _etext = .
+                0x000005ce                _etext = .
 
-.data           0x00800060       0x18 load address 0x000005ca
+.data           0x00800060       0x18 load address 0x000005ce
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -372,8 +372,8 @@ END GROUP
                 0x00800080                login
  *(COMMON)
                 0x00800082                PROVIDE (__bss_end, .)
-                0x000005ca                __data_load_start = LOADADDR (.data)
-                0x000005e2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000005ce                __data_load_start = LOADADDR (.data)
+                0x000005e6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800082        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -472,12 +472,12 @@ END GROUP
  .debug_abbrev  0x0000071d       0x14 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
  .debug_abbrev  0x00000731       0x14 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
 
-.debug_line     0x00000000      0x76d
+.debug_line     0x00000000      0x773
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000115      0x546 main.o
- .debug_line    0x0000065b       0x7a G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
- .debug_line    0x000006d5       0x98 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+ .debug_line    0x00000115      0x54c main.o
+ .debug_line    0x00000661       0x7a G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_line    0x000006db       0x98 G:/AtmelStudio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
 
 .debug_frame    0x00000000      0x138
  *(.debug_frame)

@@ -82,9 +82,10 @@ unsigned char letterReader( int row )
 void lcdCommand( unsigned char cmd )
 {
 	LCD_OUT = cmd;
-	ETC_OUT = 1;
+	ETC_OUT |= 0b00000001;
+	ETC_OUT &= 0b11111001;
 	_delay_us(1);
-	ETC_OUT = 0;
+	ETC_OUT &= 0b11111110 ;
 	_delay_us(100);
 }
 
@@ -177,9 +178,9 @@ void lcdPassType( unsigned char letter )
 		inPass[strlen(inPass)-1] = '\0';
 		lcdCommand(0x10);
 		LCD_OUT = 0x20;
-		ETC_OUT = 0x05;
+		ETC_OUT = 0x0D;
 		_delay_us(1);
-		ETC_OUT = 0x04;
+		ETC_OUT = 0x0C;
 		_delay_us(100);
 		lcdCommand(0x10);
 		return;
@@ -202,9 +203,9 @@ void lcdPassType( unsigned char letter )
 	{
 		strncat(inPass,&letter,1);
 		LCD_OUT = letter;
-		ETC_OUT = 0x05;
+		ETC_OUT = 0x0D;
 		_delay_us(1);
-		ETC_OUT = 0x04;
+		ETC_OUT = 0x0C;
 		_delay_us(100);
 	}
 }

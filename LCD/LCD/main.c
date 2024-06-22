@@ -62,8 +62,7 @@ void lcdInit()
 
 void lcdLogin()
 {
-	PORTB = PINB;
-	PORTB = PINB << 1;
+	PORTB |= (1<<1);
 	
 	lcdCommand(1);
 	lcdCommand(2);
